@@ -37,7 +37,6 @@
       android:layout_height="wrap_content"
       android:layout_gravity="bottom|start"
       android:text="@string/previous_button"
-      android:drawableRight="@mipmap/arrow_left"
       android:drawablePadding="4dp"/>
 
     <Button
@@ -46,8 +45,14 @@
       android:layout_height="wrap_content"
       android:layout_gravity="bottom|end"
       android:text="@string/next_button"
-      android:drawableRight="@mipmap/arrow_right"
       android:drawablePadding="4dp"/>
   </LinearLayout>
+
+  <Button
+    android:id="@+id/cheat_button"
+    android:text="@string/cheat_button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom|center_horizontal"/>
 
 </FrameLayout>
