@@ -19,9 +19,12 @@ public class QuizActivity extends AppCompatActivity {
 
   public static final String TAG = "QuizActivity";
   public static final String KEY_INDEX = "index";
+  public static final String KEY_CHEATER = "cheater";
+  public static final String KEY_CHEATS = "cheats";
   private static final int REQUEST_CHEAT_CODE = 0;
 
   private boolean mIsCheater;
+  private int cheatsAvail = 3;
 
   private Button mTrueButton;
   private Button mFalseButton;
@@ -90,7 +93,7 @@ public class QuizActivity extends AppCompatActivity {
       @Override
       public void onClick(View v) {
         boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
-        Intent intent = CheatActivity.newIntent(QuizActivity.this, answerIsTrue);
+        Intent intent = CheatActivity.newIntent(QuizActivity.this, answerIsTrue, isCheatAvail());
         startActivityForResult(intent, REQUEST_CHEAT_CODE);
       }
     });
@@ -120,6 +123,8 @@ public class QuizActivity extends AppCompatActivity {
     super.onSaveInstanceState(savedInstanceState);
     Log.i(TAG, "onSaveInstanceState");
     savedInstanceState.putInt(KEY_INDEX, mCurrentIndex);
+    savedInstanceState.putBoolean(KEY_CHEATER, mIsCheater);
+    savedInstanceState.putInt(KEY_CHEATS, cheatsAvail);
   }
 
   @Override
@@ -167,6 +172,12 @@ public class QuizActivity extends AppCompatActivity {
         return;
       }
       mIsCheater = CheatActivity.wasAnswerShown(data);
+      cheatsAvail--;
     }
   }
+
+  boolean isCheatAvail(){
+    return (cheatsAvail > 0);
+  }
+
 }
